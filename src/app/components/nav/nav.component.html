@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="p-0 m-0">
+
+  
+   
+    <div class="border-b-1 bg-white border-gray-200 fixed z-70 w-full transition-colors">
+        <div class="sm:flex sm:justify-between items-center mx-2 py-1 sm:mt-0 sm:py-2 sm:mx-20">
+            <div class="flex justify-between "> 
+                <div class="text-blue-600 text-2xl sm:text-3xl cursor-pointer font-serif" routerLink="/home"> UserManager </div>
+               
+                <div *ngIf="isOpen" class="sm:hidden">
+                    <img src="./icons/close.png" alt="" class="h-[25px] w-[25px] object-cover" (click)="toggleNav()">
+                </div>
+                <div *ngIf="!isOpen" class="sm:hidden">
+                    <img src="./icons/menu.png" alt="" class="h-[25px] w-[25px] object-cover" (click)="toggleNav()">
+                </div>
+            </div>
+    
+            <div class="hidden  sm:flex flex-col md:flex-row gap-10 text-xl">
+                <div class="flex gap-2 items-center cursor-pointer" [routerLink]="['/dashboard',getUsername()]">
+                    <img src="./icons/dashboards.png" class="h-[17px] w-[17px] object-cover" alt="">
+                    <div class="text-lg">Dashboard</div>
+                </div>
+                <div class="flex gap-2 items-center cursor-pointer" routerLink="/user-list">
+                    <img src="./icons/list.png" class="h-[25px] w-[25px] object-cover" alt="">
+                    <div class="text-lg">User List</div>
+                </div>
+                <div *ngIf="!isLoggedIn" class="flex gap-2 items-center cursor-pointer" routerLink="/login">
+                    <img src="./icons/login.png" class="h-[17px] w-[17px] object-cover" alt="">
+                    <div class="text-lg" routerLink="/login">Login</div>
+                </div>
+                <div *ngIf="isLoggedIn" class="flex gap-2 items-center cursor-pointer">
+                    <img src="./icons/logout.png" class="h-[17px] w-[17px] object-cover" alt="">
+                    <div class="text-lg" (click)="logout()">Logout</div>
+                </div>
+                <!-- <div *ngIf="isLoggedIn" class="flex gap-2 items-center cursor-pointer">
+                    <img [src]="userDetails.profileImgUrl" class="h-[30px] w-[30px] object-cover rounded-full" alt="fasd">
+                    <div class="text-lg" [routerLink]="['/profile', userDetails.username]">{{userDetails.username.substring(0, 7) + (userDetails.username.length > 7 ? "..." : "")}}</div>
+                </div> -->
+            </div>
+       </div>
+    </div>
+
+   <div *ngIf="isOpen" (blur)="toggleNav()" class="bg-white fixed top-9 w-[96%] z-70 left-2 border-gray-200 sm:hidden border rounded-md flex flex-col md:flex-row gap-2 px-5 text-lg pr-4 py-2 mt-2">
+        <div class="flex gap-2 items-center cursor-pointer" routerLink="/user-list">
+            <img src="./icons/list.png" class="h-[20px] w-[20px] object-cover" alt="">
+            <div class="text-lg" routerLink="/create-event">User List</div>
+        </div>
+        
+        <div class="flex gap-2 items-center" [routerLink]="['/dashboard',getUsername()]">
+            <img src="./icons/dashboards.png" class="h-[18px] w-[18px] object-cover" alt="">
+            <div class="text-base">Dashboard</div>
+        </div>
+        <div *ngIf="!isLoggedIn" class="flex gap-2 items-center">
+            <img src="./icons/login.png" class="h-[16px] w-[16px] object-cover" alt="">
+            <div class="text-base">Login</div>
+        </div>
+
+        <div *ngIf="isLoggedIn" class="flex gap-2 items-center">
+            <img src="./icons/logout.png" class="h-[16px] w-[16px] object-cover" alt="">
+            <div class="text-base" (click)="logout()">Logout</div>
+        </div>
+    </div>
+</body>
+</html>

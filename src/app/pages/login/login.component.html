@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <app-nav></app-nav>
+    <div class="pt-19 flex items-center flex-col px-4">
+        <div class="text-3xl text-blue-600">Login</div>
+        <div class="mt-8"></div>
+
+        <form action="" [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+            <!-- <div class="max-w-sm space-y-3">
+                <input type="text" formControlName="email" class="py-2.5 sm:py-3 px-5 block w-[450px] border border-gray-200 rounded-full sm:text-sm focus:ring-1 outline-none focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                    placeholder="Email" />
+            </div> -->
+            <div class="rounded-md flex items-center gap-2">
+                <img src="./icons/arroba.png" alt="user" class=" border-gray-400 p-1 rounded-sm h-[30px] w-[30px]">
+        
+                <input formControlName="username"
+                  class="border border-gray-200 shadow-blue-100 shadow-2xl focus:border-blue-600 focus:border rounded-xl px-2 py-5 h-[30px] sm:w-[370px] w-[300px]"
+                  type="text" name="username" placeholder="Username" required />
+
+            </div>       
+            <div class="mt-8"></div>
+            <div class="rounded-md flex items-center gap-2">
+                <img src="./icons/padlock.png" alt="user" class=" border-gray-400 p-1 rounded-sm h-[30px] w-[30px]">
+        
+                <input formControlName="password"
+                  class="border border-gray-200 shadow-blue-100 shadow-2xl focus:border-blue-600 focus:border rounded-xl px-2 py-5 h-[30px] sm:w-[370px] w-[300px]"
+                  type="password" name="password" placeholder="Password" required />
+              </div>
+            <div class="mt-8"></div>
+
+
+            <div id="recaptcha-container" class="g-recaptcha" data-sitekey="6LflMCErAAAAAG-Tf-2ByX6AWtwtYMcdbdQ1aZ-K"></div>
+            <div class="mt-2 font-extralight font-serif text-sm sm:text-base">Forgot password? <span class="text-blue-600 cursor-pointer" routerLink="/forgot-password">click-here</span></div>
+
+            <div class="mt-3"></div>
+
+            <button type="submit" class="border w-fit px-5 py-1 rounded-sm cursor-pointer bg-blue-600 text-white mt-3 hover:bg-blue-500">Submit</button>
+        </form>
+    </div>
+
+
+</body>
+
+</html>
