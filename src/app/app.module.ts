@@ -12,6 +12,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     DashboardComponent,
     LoginComponent,
     UserListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

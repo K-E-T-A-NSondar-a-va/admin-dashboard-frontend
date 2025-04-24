@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
 export class AuthInterceptorService implements HttpInterceptor {
   private publicUrls: string[] = [
    "http://localhost:7038/api/v1/dashboard/login",
-   "http://localhost:7038/api/v1/dashboard/get-image"
+   "http://localhost:7038/api/v1/dashboard/get-image",
+   "http://localhost:7038/api/v1/dashboard/forgot-password",
+   "http://localhost:7038/api/v1/dashboard/reset-password"
   ]
 
   constructor() { }

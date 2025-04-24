@@ -16,6 +16,8 @@ export class UserListComponent {
   currentPage = 1;
   totalPages = 1;
   paginatedUsers:any;
+  currentPageSize = 10;
+  totalElements = 0;
   constructor(private httpService: HttpServiceService) { }
 
   selectedUser: any | null = null;
@@ -26,6 +28,7 @@ export class UserListComponent {
       this.paginatedUsers = rs.content;
       this.currentPage = rs.pageable.pageNumber
       this.totalPages = rs.totalPages;
+      this.totalElements = rs.totalElements;
     });
   }
 
@@ -37,10 +40,21 @@ export class UserListComponent {
     this.selectedUser = null;
   }
 
-  filterData() {}
+  filterData() {
+    this.paginatedUsers = this.paginatedUsers.filter((user:any) => {
+      const searchLower = this.searchQuery.toLowerCase();
+      return user.name.toLowerCase().includes(searchLower) ||
+             user.username.toLowerCase().includes(searchLower) ||
+             user.dob.toLowerCase().includes(searchLower);
+    });
+
+    if(this.searchQuery.length == 0){
+      window.location.reload();
+    }
+  }
 
   deleteUser(userId: number) {
-    this.paginatedUsers.filter((user:any) => user.id != userId);
+    this.paginatedUsers = this.paginatedUsers.filter((user:any) => user.id != userId);
 
     this.httpService.deleteUser(userId).subscribe(
       (rs) => { 
@@ -75,34 +89,20 @@ export class UserListComponent {
     }
   }
 
-
- editUser: any = {};
-
 submitEdit(): void {
-  const updatedFields: any = {};
-
-  for (const key in this.editUser) {
-    if (this.editUser[key] !== this.selectedUser[key]) {
-      updatedFields[key] = this.editUser[key];
-    }
+  if (this.selectedUser) {
+    this.httpService.updateUser(this.selectedUser.id, this.selectedUser).subscribe(
+      (response: any) => {
+        console.log('User updated successfully:', response);
+        // Refresh the current page to show updated data
+        this.changePage(this.currentPage);
+        this.closeModal();
+      },
+      (error) => {
+        console.error('Error updating user:', error);
+      }
+    );
   }
-
-  if (Object.keys(updatedFields).length > 0) {
-    const userIndex = this.users.findIndex((u:any) => u.id === this.selectedUser.id);
-    if (userIndex !== -1) {
-      this.users[userIndex] = {
-        ...this.users[userIndex],
-        ...updatedFields
-      };
-    }
-
-    // Optionally send PATCH request to API:
-    // this.http.patch(`/api/users/${this.selectedUser.id}`, updatedFields).subscribe(...);
-
-    console.log('Updated Fields:', updatedFields);
-  }
-
-  this.closeModal(); 
 }
 
 

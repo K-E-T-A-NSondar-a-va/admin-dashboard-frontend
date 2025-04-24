@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { authGuardGuard } from './guard/auth-guard.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard/:username', component: DashboardComponent, canActivate: [authGuardGuard] },
   { path: 'user-list', component: UserListComponent, canActivate: [authGuardGuard] },
+  { path: 'profile/:username', component: ProfileComponent, canActivate: [authGuardGuard] },
   { path: '**', component: PageNotFoundComponent}
 ];
 

@@ -30,4 +30,15 @@ export class HttpServiceService {
     return this.httpClient.post(this.baseUrl+"/user/"+username, null);
   }
 
+  generateUsers(numUsers: number) {
+    return this.httpClient.post(this.baseUrl+"/admin/generate-users/"+numUsers, null);
+  }
+
+  updateProfilePic(username: string, profilePic: FormData) {
+    return this.httpClient.post(this.baseUrl + "/update-pic/" + username, profilePic);
+  }
+
+  forgotPassword(data: { username: string, email: string }) {
+    return this.httpClient.post(this.baseUrl + "/forgot-password", data);
+  }
 }

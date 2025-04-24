@@ -53,6 +53,11 @@ export class LoginComponent {
           this.router.navigate(['/home'])
         },
         (error: any) => {
+          alert(error.error.errorMessage);
+
+          if(error.error.errorMessage == "Invalid CAPTCHA") {
+            window.location.reload();
+          }
           console.log('error: ',error);
         }
       )

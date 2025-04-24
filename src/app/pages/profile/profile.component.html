@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <app-nav></app-nav>
+
+    <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Loading State -->
+            <div *ngIf="isLoading" class="flex justify-center items-center h-96">
+                <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+
+            <!-- Profile Content -->
+            <div *ngIf="!isLoading && userDetails" class="bg-white overflow-hidden shadow-lg rounded-xl">
+                <!-- Back Button -->
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <button 
+                        (click)="goBack()"
+                        class="inline-flex items-center text-gray-600 hover:text-gray-900"
+                    >
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to User List
+                    </button>
+                </div>
+
+                <!-- Profile Header -->
+                <div class="px-6 py-8 sm:px-8">
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <div class="relative">
+                            <img 
+                                class="h-32 w-32 rounded-full object-cover border-4 border-blue-100" 
+                                [src]="profileImageUrl" 
+                                alt="Profile"
+                            >
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-2xl leading-6 font-bold text-gray-900">
+                                {{ userDetails.name }}
+                            </h3>
+                            <p class="mt-2 text-lg text-gray-500">
+                                {{ userDetails.username }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Details -->
+                <div class="border-t border-gray-200 px-6 py-8 sm:px-8">
+                    <div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                        <!-- Date of Birth -->
+                        <div>
+                            <label class="block text-base font-medium text-gray-700 mb-2">Date of Birth</label>
+                            <div class="block w-full px-4 py-3 rounded-lg bg-gray-50 text-base text-gray-900">
+                                {{ userDetails.dob | date:'mediumDate' }}
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div>
+                            <label class="block text-base font-medium text-gray-700 mb-2">Phone Number</label>
+                            <div class="block w-full px-4 py-3 rounded-lg bg-gray-50 text-base text-gray-900">
+                                {{ userDetails.contactNumber }}
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div>
+                            <label class="block text-base font-medium text-gray-700 mb-2">Gender</label>
+                            <div class="block w-full px-4 py-3 rounded-lg bg-gray-50 text-base text-gray-900">
+                                {{ userDetails.gender }}
+                            </div>
+                        </div>
+
+                        <!-- Pincode -->
+                        <div>
+                            <label class="block text-base font-medium text-gray-700 mb-2">Pincode</label>
+                            <div class="block w-full px-4 py-3 rounded-lg bg-gray-50 text-base text-gray-900">
+                                {{ userDetails.pinCode }}
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="sm:col-span-2">
+                            <label class="block text-base font-medium text-gray-700 mb-2">Address</label>
+                            <div class="block w-full px-4 py-3 rounded-lg bg-gray-50 text-base text-gray-900">
+                                {{ userDetails.address }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
